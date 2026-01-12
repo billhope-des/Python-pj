@@ -1,0 +1,78 @@
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class WebApp(BaseHTTPRequestHandler):
+
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
+        html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Python Professional Web</title>
+            <style>
+                body {
+                    margin: 0;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: linear-gradient(135deg, #667eea, #764ba2);
+                    font-family: Arial, sans-serif;
+                }
+
+                .card {
+                    background: white;
+                    padding: 40px;
+                    border-radius: 12px;
+                    text-align: center;
+                    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+                    width: 350px;
+                }
+
+                h1 {
+                    color: #333;
+                }
+
+                p {
+                    color: #666;
+                }
+
+                button {
+                    margin-top: 20px;
+                    padding: 12px 30px;
+                    font-size: 16px;
+                    border: none;
+                    border-radius: 25px;
+                    background: linear-gradient(135deg, #ff512f, #dd2476);
+                    color: white;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+
+                button:hover {
+                    transform: scale(1.05);
+                }
+            </style>
+        </head>
+        <body>
+
+            <div class="card">
+                <h1>🚀 Python Web App</h1>
+                <p>Professional • Colorful • Simple</p>
+                <button onclick="alert('Button clicked successfully!')">
+                    Click Me
+                </button>
+            </div>
+
+        </body>
+        </html>
+        """
+
+        self.wfile.write(html.encode())
+
+server = HTTPServer(("localhost", 8000), WebApp)
+print("🌍 Server running at http://localhost:8000")
+server.serve_forever()
